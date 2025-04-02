@@ -1,14 +1,46 @@
-{% extends "index.html.j2" %}
-{% import 'bootstrap/wtf.html' as wtf %}
+{% extends "base.html.j2" %}
 
-<head>
-    <title>支付成功</title>
-</head>
+{% block title %}支付 - 百影院{% endblock %}
+
 {% block content %}
-    <h1>支付成功</h1>
-    <h2>請使用以下二維碼到自動取票機取票</h2>
-    <div>
-    <img src="{{ url_for('static', filename='電影票.png') }}" alt="電影票">
+    <div id="particles-js"></div>
+    <div class="payment-page">
+        <h2 class="title">支付頁面</h2>
+        <p class="subtitle">請輸入您的付款信息</p>
+        <form>
+            <div class="input-group">
+                <label for="card_number">信用卡號碼:</label>
+                <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
+                <span class="input-icon"><i class="fas fa-credit-card"></i></span>
+            </div>
+            <div class="input-group">
+                <label for="expiry_date">有效期:</label>
+                <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>
+                <span class="input-icon"><i class="fas fa-calendar-alt"></i></span>
+            </div>
+            <button type="submit" class="submit-btn">提交</button>
+        </form>
     </div>
-    <h3>感谢您的購買！</h3>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#3498db' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#3498db', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+    </script>
 {% endblock %}
